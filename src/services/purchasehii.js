@@ -1,5 +1,4 @@
 import { http } from './config'
-//import axios from 'axios'
 
 export default{
 
@@ -10,41 +9,27 @@ export default{
         return http.post('login',User)
     },
 
-    listar:(Token) => {
+    listar_pho_id:(Token,id_pho) => {
         http.defaults.headers.common['Access-Control-Allow-Origin'] = "http://192.168.10.126:8080"
         http.defaults.headers.common['Cache-Control'] = "no-cache"
         http.defaults.headers.common['accept'] = "*/*"
         http.defaults.headers.common['Content-Type'] = "application/json"
         http.defaults.headers.common['X-Requested-With'] = "XMLHttpRequest"
         http.defaults.headers.common['Authorization'] = Token ? "Bearer "+ Token : ""
-        return http.get('H100')
+        return http.get('purchaseHistIncomingInvoices?PHO_Id='+id_pho)
     },
 
-    salvar:(H100) => {
-        /*
-        const article = { title: "Vue POST Request Example" };        
-        const headers = { 
-            "Authorization": "Bearer my-token",
-            "My-Custom-Header": "foobar"
-        };        
-        */
-
- //       axios.post("https://reqres.in/api/articles", article, { headers })
- //       .then(response => this.articleId = response.data.id);
-
-        return http.post('H100',H100)
-    
-//        return http.post('H100',H100)
+    salvar:(purchasehii) => {
+        return http.post('purchaseHistIncomingInvoices',purchasehii)
     },
 
-    atualizar:(H100) => {
-//        return http.put('H100/'+H100.H100_Id,H100,{ headers })        
-        return http.put('H100/'+H100.H100_Id,H100)
+    atualizar:(purchasehii) => {
+        return http.put('purchaseHistIncomingInvoices/'+purchasehii.id,purchasehii)
     },
 
 
-    apagar:(H100) => {
-        return http.delete('H100/'+H100)
+    apagar:(purchasehii) => {
+        return http.delete('purchaseHistIncomingInvoices/'+purchasehii)
     }
 
 }
